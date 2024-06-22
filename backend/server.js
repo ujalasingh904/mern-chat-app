@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
 import userRoutes from "./routes/userRoutes.route.js"
+import cors from "cors"
 dotenv.config()
 
 mongoose
@@ -15,6 +16,7 @@ mongoose
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors())
 const port = process.env.PORT || 5000
 
 app.use('/api/auth', authRoutes)

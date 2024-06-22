@@ -37,22 +37,22 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
 
   const { email, password } = req.body
-  try {
+  try { 
     const validUser = await User.findOne({ email })
 
-    const validPassword = bcryptjs.compareSync(password, validUser?.password)
+    const validPassword = bcryptjs.compareSync(password, validUser?.password || " ")
 
     if (!validPassword)
       res.status(401).json({ message: "Invalid credentials" })
-
+ 
     generateTokenAndSetCookie(validUser._id, res);
     const { password: hashedPassword, ...rest } = validUser._doc;
 
-    res.status(200).json(rest)
+    res.status(200).json(rest) 
 
   } catch (error) {
     console.log("error in login controller", error.message)
-    res.status(500).json({ error: "Internal server error" })
+    res.status(500).json({ error: "Internal server error" })  
   }
 }
 export const logout = async (req, res) => {
