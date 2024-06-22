@@ -6,7 +6,13 @@ export const signup = async (req, res) => {
   const { fullname, username, email, password, confirmPassword, gender } = req.body;
   try {
     if (password !== confirmPassword)
-      return res.status(201).json({ error: "Password dont match" })
+      return res.status(400).json({ error: "Password dont match" })
+
+    const user = await User.findOne({ email })
+
+    if (user)
+      return res.status(400).json({ error: "User with this email already exist" })
+
 
     const hashedPassword = bcryptjs.hashSync(password, 10);
 
@@ -29,7 +35,7 @@ export const signup = async (req, res) => {
     res.status(201).json(rest)
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ error: "User with this credentials already exist" });
   }
 }
@@ -37,22 +43,22 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
 
   const { email, password } = req.body
-  try { 
+  try {
     const validUser = await User.findOne({ email })
 
     const validPassword = bcryptjs.compareSync(password, validUser?.password || " ")
 
     if (!validPassword)
       res.status(401).json({ message: "Invalid credentials" })
- 
+
     generateTokenAndSetCookie(validUser._id, res);
     const { password: hashedPassword, ...rest } = validUser._doc;
 
-    res.status(200).json(rest) 
+    res.status(200).json(rest)
 
   } catch (error) {
     console.log("error in login controller", error.message)
-    res.status(500).json({ error: "Internal server error" })  
+    res.status(500).json({ error: "Internal server error" })
   }
 }
 export const logout = async (req, res) => {

@@ -3,11 +3,14 @@ import GenderCheckBox from "../components/GenderCheckBox.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import userSignup from "../Hooks/userSignup.js";
 
 const Singup = () => {
 
   const [formData, setformData] = useState({})
   const navigate = useNavigate();
+
+  const { loading, signup } = userSignup()
 
   const handleChange = (e) => {
     setformData({ ...formData, [e.target.id]: e.target.value })
@@ -16,15 +19,7 @@ const Singup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const baseUrl = 'http://localhost:5000/api/auth/signup'
-      const { data: res } = await axios.post(baseUrl, formData)
-
-      console.log(res)
-      navigate('/login')
-    } catch (error) {
-      console.log(error)
-    }
+    await signup(formData)
 
   }
 
