@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import GenderCheckBox from "../components/GenderCheckBox.jsx";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import userSignup from "../Hooks/userSignup.js";
 
 const Singup = () => {
 
   const [formData, setformData] = useState({})
-  const navigate = useNavigate();
 
   const { loading, signup } = userSignup()
 
@@ -91,7 +88,7 @@ const Singup = () => {
 
 
           <div className='py-[1rem]'>
-            <button className='btn btn-block btn-sm mt-2 border border-slate-700'>Sign Up</button>
+            <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading} >{loading ? <span className="loading loading-spinner"></span> : 'Sign Up'}</button>
           </div>
 
           <span className="text-white">Already have an account?

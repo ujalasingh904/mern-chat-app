@@ -1,14 +1,16 @@
 import { useState } from "react"
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 const userSignup = () => {
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
+    const { setAuthUser } = useAuthContext()
 
     const signup = async (formData) => {
-        const success = handleInPutErrors({ fullname:formData.fullname, username:formData.username, email:formData.email, password:formData.password, confirmPassword:formData.confirmPassword, gender:formData.gender })
+        const success = handleInPutErrors({ fullname: formData.fullname, username: formData.username, email: formData.email, password: formData.password, confirmPassword: formData.confirmPassword, gender: formData.gender })
 
         if (!success) return;
         setLoading(true)
@@ -16,11 +18,15 @@ const userSignup = () => {
         try {
             const baseUrl = 'http://localhost:5000/api/auth/signup'
             const { data: res } = await axios.post(baseUrl, formData)
-            
-            if(res.error)
+
+            if (res.error)
                 throw new Error(res.error)
             console.log(res)
-            navigate('/login')
+            toast.success('Account created successfully')
+
+            sessionStorage.setItem("chat-user", JSON.stringify(res))
+            setAuthUser(res)
+ 
         } catch (error) {
             toast.error(error.message)
         } finally {
