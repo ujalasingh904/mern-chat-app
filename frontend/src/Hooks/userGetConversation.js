@@ -17,8 +17,8 @@ const userGetConversation = () => {
                 if (res.error)   
                     throw new Error(res.error)
 
-                setConversations(res)
-            } catch (error) {
+                setConversations(res)  
+            } catch (error) { 
                 toast.error(error.message)
             } finally {
                 setLoading(false)

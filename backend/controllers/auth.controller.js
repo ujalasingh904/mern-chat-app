@@ -28,14 +28,17 @@ export const signup = async (req, res) => {
       profilePic: gender == 'male' ? boyProfilePic : girlProfilePic
     })
 
-    generateTokenAndSetCookie(newUser._id, res)
-    await newUser.save();
+    if (newUser) {
 
-    const { password: hashedPassword2, ...rest } = newUser._doc
-    res.status(201).json(rest)
-
+      generateTokenAndSetCookie(newUser._id, res)
+      await newUser.save();
+      const { password: hashedPassword2, ...rest } = newUser._doc
+      res.status(201).json(rest)
+    } else {
+      res.status(400).json({ error: "Invalid user Data" });
+    }
   } catch (error) {
-    // console.log(error);
+    console.log("Error in signup controller", error.message);
     res.status(500).json({ error: "User with this credentials already exist" });
   }
 }
