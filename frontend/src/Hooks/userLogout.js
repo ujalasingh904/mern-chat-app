@@ -14,7 +14,7 @@ const userLogout = () => {
         setLoading(true)
         try {
             const baseUrl = 'http://localhost:5000/api/auth/logout'
-            const { data: res } = await axios.post(baseUrl)
+            const { data: res } = await axios.post(baseUrl,{ withCredentials: true })
             if (res.error)
                 throw new Error(res.error)
 

@@ -7,6 +7,8 @@ const userGetMessages = () => {
 
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = userConversation();
+    console.log(messages)
+    
 
     useEffect(() => {
         const getMessages = async () => {
@@ -15,13 +17,13 @@ const userGetMessages = () => {
 
                 const baseUrl = `http://localhost:5000/api/messages/${selectedConversation._id}`
 
-                const { data: res } = await axios.get(baseUrl)
+                const { data: res } = await axios.get(baseUrl,{ withCredentials: true })
 
-                if (res.error) throw new Error(res.error);
+                // if (res.error) throw new Error(res.error);
                 
                 setMessages(res);
             } catch (error) {
-                toast.error(error.message);
+                console.log(error.message);
             } finally {
                 setLoading(false);
             }

@@ -15,7 +15,7 @@ const userSignup = () => {
 
         try {
             const baseUrl = 'http://localhost:5000/api/auth/signup'
-            const { data: res } = await axios.post(baseUrl, formData)
+            const { data: res } = await axios.post(baseUrl, formData,{ withCredentials: true })
 
             if (res.error)
                 throw new Error(res.error)

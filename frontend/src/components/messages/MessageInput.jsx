@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const MessageInput = () => {
     const [message, setMessage] = useState("")
-    const { loading, sendMessage } = userSendMessage()
+    const { loading, sendMessage } = userSendMessage() 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -24,7 +24,7 @@ const MessageInput = () => {
                 />
                 <button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
                     {loading ? <span className="loading loading-spinner"></span> : <BsSend />}
-                </button>
+                </button> 
             </div>
         </form>
     )

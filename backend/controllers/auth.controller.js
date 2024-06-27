@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js"
 import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
 import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
@@ -32,8 +33,10 @@ export const signup = async (req, res) => {
 
       generateTokenAndSetCookie(newUser._id, res)
       await newUser.save();
+      
       const { password: hashedPassword2, ...rest } = newUser._doc
-      res.status(201).json(rest)
+      res.status(201).json(rest) 
+       
     } else {
       res.status(400).json({ error: "Invalid user Data" });
     }

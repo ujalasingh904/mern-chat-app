@@ -5,6 +5,11 @@ import { Message } from "../models/message.model.js";
 export const sendMessage = async (req, res) => {
     try {
         const { message } = req.body;
+        
+        
+        if (!message) {
+            return res.status(400).json({ message: 'Message content is required' });
+        }
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
 
@@ -47,18 +52,18 @@ export const getMessage = async (req, res) => {
         const { id: receiverId } = req.params;
         const senderId = req.user._id;
 
-        const conversation =await  Conversation.findOne({
+        const conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId] }
         }).populate("messages")
-        
-        if(!conversation)
-            return res.status(404).json([]);
-            
+
+        if (!conversation)
+            return res.status(200).json([]);
+
         res.status(200).json(conversation.messages)
-        
+
     } catch (error) {
         console.log("error in getMessage", error.message)
-        return res.status(500).json({error:"Internal server error"})
+        return res.status(500).json({ error: "Internal server error" })
     }
 
 
