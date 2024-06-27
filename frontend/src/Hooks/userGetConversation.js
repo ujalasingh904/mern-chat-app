@@ -12,7 +12,7 @@ const userGetConversation = () => {
         const getConversation = async () => {
             setLoading(true)
             try {
-                const baseUrl = `http://localhost:5000/api/users`
+                const baseUrl = `https://mern-chat-app-tvr8.onrender.com/api/users`
                 const { data: res } = await axios.get(baseUrl,{ withCredentials: true })
                 if (res.error)   
                     throw new Error(res.error)

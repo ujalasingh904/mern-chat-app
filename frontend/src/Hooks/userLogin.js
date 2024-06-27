@@ -15,7 +15,7 @@ const userLogin = () => {
         setLoading(true)
         try {
 
-            const baseUrl = 'http://localhost:5000/api/auth/login'
+            const baseUrl = 'https://mern-chat-app-tvr8.onrender.com/api/auth/login'
             const { data: res } = await axios.post(baseUrl, formData,{ withCredentials: true })
             if (res.error)
                 throw new Error(res.error)
