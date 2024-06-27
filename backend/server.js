@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route.js"
 import messageRoutes from "./routes/message.route.js"
 import userRoutes from "./routes/userRoutes.route.js"
 import cors from "cors"
+import { app, server } from "./socket/socket.js"
 dotenv.config()
 
 mongoose
@@ -13,7 +14,6 @@ mongoose
     .then(() => console.log('connected to database'))
     .catch((error) => console.log(error))
 
-const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors(
@@ -28,4 +28,4 @@ app.use('/api/auth', authRoutes)
 app.use('/api/messages', messageRoutes)
 app.use('/api/users', userRoutes)
 
-app.listen(port, () => console.log(`listening on port:`, port))
+server.listen(port, () => console.log(`listening on port:`, port))
