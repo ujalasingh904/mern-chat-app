@@ -13,7 +13,7 @@ const userLogout = () => {
     const logout = async () => {
         setLoading(true)
         try {
-            const baseUrl = 'http://localhost:5000/api/auth/logout'
+            const baseUrl = 'https://mern-chat-app-tvr8.onrender.com/api/auth/logout'
             const { data: res } = await axios.post(baseUrl,{ withCredentials: true })
             if (res.error)
                 throw new Error(res.error)
