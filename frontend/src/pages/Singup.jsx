@@ -21,8 +21,8 @@ const Singup = () => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
-      <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0'>
+    <div className='flex flex-col items-center justify-center w-full  sm:!max-w-96 mx-auto'>
+      <div className='w-full px-6 py-4 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0'>
         <h1 className='text-3xl font-semibold text-center text-gray-300'>
           Sign Up <span className='text-blue-500'> ChatApp</span>
         </h1>
@@ -87,8 +87,8 @@ const Singup = () => {
           <GenderCheckBox formData={formData} setformData={setformData} />
 
 
-          <div className='py-[1rem]'>
-            <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading} >{loading ? <span className="loading loading-spinner"></span> : 'Sign Up'}</button>
+          <div className='pt-[1rem] pb-[.5rem]'>
+            <button className='btn btn-block btn-sm border border-slate-700' disabled={loading} >{loading ? <span className="loading loading-spinner"></span> : 'Sign Up'}</button>
           </div>
 
           <span className="text-white">Already have an account?
