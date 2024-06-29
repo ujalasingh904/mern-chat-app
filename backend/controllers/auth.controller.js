@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
 
     if (user)
       return res.status(400).json({ error: "User with this email already exist" })
-
+ 
 
     const hashedPassword = bcryptjs.hashSync(password, 10);
 
@@ -55,12 +55,12 @@ export const login = async (req, res) => {
     const validPassword = bcryptjs.compareSync(password, validUser?.password || " ")
 
     if (!validPassword)
-      res.status(401).json({ message: "Invalid credentials" })
+      res.status(400).json({ error: "Invalid credentials" })
 
     generateTokenAndSetCookie(validUser._id, res);
     const { password: hashedPassword, ...rest } = validUser._doc;
 
-    res.status(200).json(rest)
+    res.status(200).json(rest) 
 
   } catch (error) {
     console.log("error in login controller", error.message)

@@ -7,7 +7,7 @@ const userGetMessages = () => {
 
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = userConversation();
-    console.log(messages)
+    // console.log(messages)
     
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const userGetMessages = () => {
             setLoading(true);
             try {
 
-                const baseUrl = `https://mern-chat-app-tvr8.onrender.com/api/messages/${selectedConversation._id}`
+                const baseUrl = `http://localhost:5000/api/messages/${selectedConversation._id}`
 
                 const { data: res } = await axios.get(baseUrl,{ withCredentials: true })
 

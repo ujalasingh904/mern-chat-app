@@ -4,7 +4,7 @@ import { useSocketContext } from '../../context/SocketContext';
 
 const Conversation = ({ conversation, emoji, lastIdx }) => {
     const { selectedConversation, setSelectedConversation } = userConversation();
-    console.log(selectedConversation)
+    // console.log(selectedConversation)
 
     const isselected = selectedConversation?._id === conversation._id;
     const { onlineUsers } = useSocketContext()

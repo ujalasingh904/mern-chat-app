@@ -14,19 +14,19 @@ const userSignup = () => {
         setLoading(true)
 
         try {
-            const baseUrl = 'https://mern-chat-app-tvr8.onrender.com/api/auth/signup'
+            const baseUrl = 'http://localhost:5000/api/auth/signup'
             const { data: res } = await axios.post(baseUrl, formData,{ withCredentials: true })
 
             if (res.error)
-                throw new Error(res.error)
-            console.log(res)
+                throw new Error(res.error) 
+            
             toast.success('Account created successfully')
 
             sessionStorage.setItem("chat-user", JSON.stringify(res))
             setAuthUser(res)
  
-        } catch (error) {
-            toast.error(error.message)
+        } catch (error) { 
+            toast.error(error.message)  
         } finally {
             setLoading(false)
         }

@@ -8,12 +8,12 @@ const userSendMessage = () => {
 
     const [loading, setLoading] = useState(false)
     const { messages, setMessages, selectedConversation } = userConversation() 
-    console.log(messages)
+    // console.log(messages)
 
     const sendMessage = async (message) => {
         setLoading(true)
         try {
-            const baseUrl = `https://mern-chat-app-tvr8.onrender.com/api/messages/send/${selectedConversation._id}`
+            const baseUrl = `http://localhost:5000/api/messages/send/${selectedConversation._id}`
 
             const { data: res } = await axios.post(baseUrl, {message}, { withCredentials: true })
             if (res.error)

@@ -8,9 +8,7 @@ import { useAuthContext } from './context/AuthContext.jsx'
 
 
 const App = () => {
-  const { authUser } = useAuthContext()
-  console.log(authUser)
-
+  const { authUser } = useAuthContext() 
 
 
   return (
