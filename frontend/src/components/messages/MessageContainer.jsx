@@ -11,7 +11,7 @@ const MessageContainer = () => {
   const notselected = selectedConversation === null;
   const { authUser } = useAuthContext()
   return (
-    <div className={`min-w-[300px] max-w-[300px] md:min-w-[450px]  md:max-w-[450px] ${notselected ? 'hidden' : "flex"} w-full h-full sm:!flex flex-col`}>
+    <div className={`min-w-[310px] max-w-[310px] md:min-w-[450px]  md:max-w-[450px] ${notselected ? 'hidden' : "flex"} w-full h-full sm:!flex flex-col`}>
       {
         !selectedConversation ? (<NoChatSelected authUser={authUser} />) : (
           <>
